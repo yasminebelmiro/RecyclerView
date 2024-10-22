@@ -1,35 +1,40 @@
-package ifgoiano.urt.recyclerview
 
+package ifgoiano.urt.recyclerview
 import Estado
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import ifgoiano.urt.recyclerview.R
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class DetalheEstadoActivity : AppCompatActivity() {
-
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_detalhe_estado)
-
-        // Recuperar o objeto Estado da Intent
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         val estado = intent.getParcelableExtra<Estado>("estado")
 
         if (estado != null) {
-            // Usando findViewById para referenciar as views
-            val imgBandeiraDetalhe = findViewById<ImageView>(R.id.imgBandeiraDetalhe)
-            val txtNomeEstadoDetalhe = findViewById<TextView>(R.id.txtNomeEstadoDetalhe)
-            val txtCapitalEstadoDetalhe = findViewById<TextView>(R.id.txtCapitalEstadoDetalhe)
-            val txtPopulacaoEstadoDetalhe = findViewById<TextView>(R.id.txtPopulacaoEstadoDetalhe)
-            val txtRegiaoEstadoDetalhe = findViewById<TextView>(R.id.txtRegiaoEstadoDetalhe)
+            val bandeiraImageView: ImageView = findViewById(R.id.imageViewBandeiraDetalhe)
+            val nomeTextView: TextView = findViewById(R.id.textViewNomeEstadoDetalhe)
+            val capitalTextView: TextView = findViewById(R.id.textViewCapital)
+            val populacaoTextView: TextView = findViewById(R.id.textViewPopulacao)
+            val regiaoTextView: TextView = findViewById(R.id.textViewRegiao)
 
-            // Preencher os dados do estado
-            imgBandeiraDetalhe.setImageResource(estado.bandeira)
-            txtNomeEstadoDetalhe.text = estado.nome
-            txtCapitalEstadoDetalhe.text = "Capital: ${estado.capital}"
-            txtPopulacaoEstadoDetalhe.text = "População: ${estado.populacao}"
-            txtRegiaoEstadoDetalhe.text = "Região: ${estado.regiao}"
+            bandeiraImageView.setImageResource(estado.bandeira)
+            nomeTextView.text = estado.nome
+            capitalTextView.text = "Capital: ${estado.capital}"
+            populacaoTextView.text = "População: ${estado.populacao}"
+            regiaoTextView.text = "Região: ${estado.regiao}"
         }
     }
 }

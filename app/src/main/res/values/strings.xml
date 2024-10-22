@@ -1,9 +1,4 @@
 <resources>
     <string name="app_name">RecyclerView</string>
-    <string name="estados">Estados:</string>
-    <string name="regiao">Região</string>
-    <string name="bandeira">Bandeira</string>
-    <string name="nome_do_estado">Nome do Estado</string>
-    <string name="capital">Capital</string>
-    <string name="popula_o">População</string>
+    <string name="bandeira_do_estado">Bandeira do estado</string>
 </resources>
